@@ -1,48 +1,27 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+name: Generating readme file
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    branches:
+      - master
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: windows-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version:"3.9"
-          
-      - name: Running workflow.py file
-        run: python workflow.py
+          python-version: "3.8"
+
+      - name : Running Writereadme.py file
+        run: python Writereadme.py
         
-      - name Create report file
+      - name: Create report file
         run: date +%s > report.txt
       - name: Commit report
-          run:
-            git config --global user.name 'user.name'
-            git config --global user.email 'user.email'
-            git add .
-            git commit -am "Automated report"
-            git push origin master
-            
-
-     
+        run: |
+          git config --global user.name 'Naveenkumar M'
+          git config --global user.email 'naveen9715568487@gmail.com'
+          git add .
+          git commit -am "Automated report"
+          git push origin master
